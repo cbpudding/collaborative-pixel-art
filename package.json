@@ -1,0 +1,23 @@
+{
+  "name": "collaborative-pixel-art",
+  "version": "1.0.0",
+  "description": "A terrible idea that was shamelessly stolen from Reddit",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cbpudding/collaborative-pixel-art.git"
+  },
+  "author": "",
+  "license": "0BSD",
+  "bugs": {
+    "url": "https://github.com/cbpudding/collaborative-pixel-art/issues"
+  },
+  "homepage": "https://github.com/cbpudding/collaborative-pixel-art#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "ws": "^8.5.0"
+  }
+}
