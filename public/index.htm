@@ -5,5 +5,25 @@
     </head>
     <body>
         <!-- TODO -->
+        Above
+       <br><canvas id = 'board'></canvas><br>
+       <b id = 'text'></b>
+        Below
+        <!--TEMPORARY SCRIPT-->
+        <script>
+            const canvas = document.getElementById('board');
+            const ctx = canvas.getContext('2d');
+            function drawPixel(context, x, y, color) {
+                context.fillStyle = color || '#000';
+                context.fillRect(x,y, 1, 1);
+            }
+            canvas.addEventListener('click', printMousePos, true);
+            function printMousePos(e){
+                cursorX = e.offsetX;
+                cursorY= e.offsetY;
+                drawPixel(ctx, cursorX, cursorY);
+                document.getElementById('text').innerHTML = "pageX: " + cursorX +",pageY: " + cursorY;
+            }
+        </script>
     </body>
 </html>
