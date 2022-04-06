@@ -9,6 +9,6 @@ app.get("/", (_, res) => {
 
 app.use(express.static("public"));
 
-const wss = new ws.WebSocketServer({server: app.listen(9078)});
+const wss = new ws.WebSocketServer({server: app.listen(9079)});
 
 // TODO: Endpoint for changing a pixel
