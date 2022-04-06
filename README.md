@@ -11,6 +11,7 @@ We thought it was unfair that [r/place](https://www.reddit.com/r/place/) is only
 - [ ] Incorporate DB and ORM
 - [ ] Frontend design
 - [ ] Zoom/Scaling
+
 ...etc
 
 
