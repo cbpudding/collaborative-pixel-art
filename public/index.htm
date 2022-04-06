@@ -2,10 +2,16 @@
 <html lang="en">
     <head>
         <title>Collaborative Pixel Art</title>
+        <style>head,body,html{image-rendering: pixelated}</style>
     </head>
     <body>
         <!-- TODO -->
         Above
+
+		<div id="menu">
+			<label for="colorWell">Color Picker:</label>
+   			<input type="color" id="colorWell">
+		</div>
        <br><canvas id = 'board'></canvas><br>
        <a id="download" download="myImage.jpg" href="" onclick="download_img(this);">Download to myImage.jpg</a>
        <b id = 'text'></b>
@@ -17,15 +23,17 @@
             const ctx = canvas.getContext('2d');
             function drawPixel(context, x, y, color) {
                 context.fillStyle = color;
-                context.fillRect(x,y, 1, 1);
+                context.fillRect(x,y, 5, 5);
             }
 
             canvas.addEventListener('click', printMousePos, true);
-
+            
             function printMousePos(e){
                 cursorX = e.offsetX;
                 cursorY= e.offsetY;
-                drawPixel(ctx, cursorX, cursorY);
+                let tile_x = Math.round(cursorX / 5) * 5;
+                let tile_y = Math.round(cursorY / 5) * 5;
+                drawPixel(ctx, tile_x, tile_y);
             }
             /* End of Canvas Pixel Change */
 
