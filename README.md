@@ -6,4 +6,11 @@ We thought it was unfair that [r/place](https://www.reddit.com/r/place/) is only
 ## Contributors
 [Ethan Onweller](https://github.com/ethanonweller)
 
+## TODO
+- [ ] User authentication
+- [ ] Incorporate DB and ORM
+- [ ] Frontend design
+- [ ] Zoom/Scaling
+...etc
+
 
