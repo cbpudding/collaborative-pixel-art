@@ -7,12 +7,11 @@
     <body>
         <!-- TODO -->
         Above
-
 		<div id="menu">
 			<label for="colorWell">Color Picker:</label>
    			<input type="color" id="colorWell">
 		</div>
-       <br><canvas id = 'board'></canvas><br>
+       <br><canvas id = 'board' style = 'width: 512; height: 512;'></canvas><br>
        <a id="download" download="myImage.jpg" href="" onclick="download_img(this);">Download to myImage.jpg</a>
        <b id = 'text'></b>
         Below
@@ -25,14 +24,13 @@
                 context.fillStyle = color;
                 context.fillRect(x,y, 5, 5);
             }
-
             canvas.addEventListener('click', printMousePos, true);
-            
             function printMousePos(e){
                 cursorX = e.offsetX;
                 cursorY= e.offsetY;
                 let tile_x = Math.round(cursorX / 5) * 5;
                 let tile_y = Math.round(cursorY / 5) * 5;
+                http(`/api/v1/${{x:tile_x,y:tile_y}}`)
                 drawPixel(ctx, tile_x, tile_y);
             }
             /* End of Canvas Pixel Change */
@@ -49,10 +47,19 @@
                 colorWell.select();
             }
 
-            function updateFirst(event) {  // changes pixel color to selection
+            function updateFirst(event) {
                     drawPixel(ctx, cursorX, cursorY, event.target.value);
             }
             /* End of Color Menu */
+
+            /* a */
+            function http(api){
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", api, false );
+                xmlHttp.send();
+                return console.log(xmlHttp.responseText);
+            }
+            /* end of a */
 
             /* Full image download for canvas */
             download_img = function(el) {
