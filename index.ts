@@ -1,7 +1,13 @@
-const express = require("express");
-const ws = require("ws");
+import { PrismaClient } from ".prisma/client";
+
+import express from "express";
+import fs from "fs";
+import jwt from "jsonwebtoken";
+import ws from "ws";
 
 const app = express();
+const config = JSON.parse(fs.readFileSync("config.json").toString());
+const prisma = new PrismaClient();
 
 app.get("/", (_, res) => {
     res.sendFile(__dirname + "/public/index.html");
@@ -19,13 +25,13 @@ Type 2 - S -> C - Place(Pixel update)
 
 // Handle WebSocket connections
 wss.on("connection", sock => {
-    sock.last = Date.now();
+    (sock as any).last = Date.now();
     sock.on("message", data => {
         try {
-            let msg = JSON.parse(data);
+            let msg = JSON.parse(data.toString());
             if(typeof msg.type !== "undefined") {
                 if(msg.type === 0) {
-                    sock.last = Date.now();
+                    (sock as any).last = Date.now();
                     sock.send(JSON.stringify({type: 1}));
                 }
             }
@@ -39,7 +45,7 @@ wss.on("connection", sock => {
 setInterval(() => {
     wss.clients.forEach(sock => {
         if(sock.readyState === ws.OPEN) {
-            if(sock.last < Date.now() - 15000) {
+            if((sock as any).last < Date.now() - 15000) {
                 sock.terminate();
             }
         }
@@ -47,7 +53,7 @@ setInterval(() => {
 }, 15000);
 
 // API for placing pixels
-app.get('/api/v1/placePixel/:x/:y/:color', (_, res) => {
+app.get('/api/v1/placePixel/:x/:y/:color', (req, res) => {
     let status = {success: false};
     // Collect data
     let [x, y, color] = [req.params.x, req.params.y, req.params.color];
