@@ -1,6 +1,6 @@
 # Collaborative Pixel Art
-A terrible idea that was shamelessly stolen from [Reddit](https://www.reddit.com/r/place/)
+## A terrible idea that was shamelessly stolen from Reddit
 
-# Credits
-Full credits are available [here]("https://github.com/cbpudding/collaborative-pixel-art/blob/main/public/CREDITS.md")
+We thought it was unfair that [r/place](https://www.reddit.com/r/place/) is only up for a few days at a time, so we are in the process of creating our own. 
 
+## Contributors
