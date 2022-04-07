@@ -11,11 +11,18 @@ app.get('/api/v1/:coords', (req,res) => {
     let status = {
         success: true
     }
-    console.log(JSON.parse(req.params.coords))
     res.send(status);
 });
+
 app.use(express.static("public"));
 
-const wss = new ws.WebSocketServer({server: app.listen(9078)});
+const wss = new ws.WebSocketServer({server: app.listen(9077)});
 
-// TODO: Endpoint for changing a pixel
+wss.on('connection', function connection(ws) {
+    console.log('connected')
+    ws.on('message', function message(data) {
+      console.log('received: %s', data);
+    });
+  
+    ws.send('something');
+});

@@ -3,6 +3,12 @@
     <head>
         <title>Collaborative Pixel Art</title>
         <style>head,body,html{image-rendering: pixelated}</style>
+        <link rel = 'stylesheet' href = '/css/styles.css'>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+        const socket = io();
+        
+        </script>
     </head>
     <body>
         <!-- TODO -->
@@ -24,6 +30,23 @@
                 context.fillStyle = color;
                 context.fillRect(x,y, 5, 5);
             }
+            const a = 1;
+            canvas.addEventListener('mousemove', function(e) {
+                cursorX = e.offsetX;
+                cursorY = e.offsetY;
+                let tile_x = Math.round(cursorX / 5) * 5;
+                let tile_y = Math.round(cursorY / 5) * 5;
+                setInterval(function(){
+                    if(a === 1){
+                        drawPixel(ctx, tile_x, tile_y, "#808080")
+                        a = 0
+                    }else if(a === 0){
+                        drawPixel(ctx, tile_x, tile_y, "#000000")
+                        a = 1
+                    }
+                },1000)
+            }, true);
+
             canvas.addEventListener('click', printMousePos, true);
             function printMousePos(e){
                 cursorX = e.offsetX;
@@ -48,18 +71,18 @@
             }
 
             function updateFirst(event) {
-                    drawPixel(ctx, cursorX, cursorY, event.target.value);
+                drawPixel(ctx, cursorX, cursorY, event.target.value);
             }
             /* End of Color Menu */
 
-            /* a */
+            /* API request to set pixels */
             function http(api){
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.open( "GET", api, false );
                 xmlHttp.send();
                 return console.log(xmlHttp.responseText);
             }
-            /* end of a */
+            /* End of API request to set pixels */
 
             /* Full image download for canvas */
             download_img = function(el) {
@@ -67,6 +90,7 @@
                 var imageURI = canvas.toDataURL("image/jpg");
                 el.href = imageURI;
             };
+
         </script> 
 
     </body>
