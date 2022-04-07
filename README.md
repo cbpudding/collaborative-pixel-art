@@ -2,6 +2,6 @@
 A terrible idea that was shamelessly stolen from [Reddit](https://www.reddit.com/r/place/)
 
 # Credits
-Full credits are available [here](https://github.com/cbpudding/collaborate-pixel-art/blob/public/CREDITS.md)
+Full credits are available [here](CREDITS.md)
 
 
