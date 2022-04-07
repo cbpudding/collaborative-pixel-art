@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+
+		<link rel="stylesheet" href="styles.css" />
+		<title>Collaborative Pixel Art</title>
+
+	</head>
+
+	<body>
+
+        <!-- TODO -->
+        Above
+		<div id="menu">
+			<label for="colorWell">Color Picker:</label>
+   			<input type="color" id="colorWell">
+		</div>
+       <br><canvas id = 'board' style = 'width: 512; height: 512;'></canvas><br>
+       <a id="download" download="myImage.jpg" href="" onclick="download_img(this);">Download to myImage.jpg</a>
+       <b id = 'text'></b>
+        Below
+
+		<script src="place.js"></script>
+	</body>
+</html>
