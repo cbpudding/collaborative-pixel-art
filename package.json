@@ -17,12 +17,14 @@
   },
   "homepage": "https://github.com/cbpudding/collaborative-pixel-art#readme",
   "dependencies": {
+    "@jimp/core": "^0.16.1",
     "@prisma/client": "^3.12.0",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^17.0.23",
     "@types/ws": "^8.5.3",
     "express": "^4.17.3",
+    "jimp": "^0.16.1",
     "jsonwebtoken": "^8.5.1",
     "ws": "^8.5.0"
   },
