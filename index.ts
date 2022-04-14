@@ -62,7 +62,9 @@ setInterval(() => {
 app.get('/api/v1/placePixel/:x/:y/:color', (req, res) => {
     let status = {success: false};
     // Collect data
-    let [x, y, color] = [req.params.x, req.params.y, req.params.color];
+    let color = req.params.color;
+    let x = parseInt(req.params.x);
+    let y = parseInt(req.params.y);
     // Make sure we're dealing with correct types
     if(typeof x === "number" && typeof y === "number" && typeof color === "string") {
         if(/[0-9A-Fa-f]{6}/.test(color)) {
