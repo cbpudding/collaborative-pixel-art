@@ -18,7 +18,11 @@ model Pixel {
 }
 
 model User {
-  id           Int      @id @unique
-  lastPlaced   DateTime
-  placedPixels Pixel[]
+  access_token     String
+  id               Int      @id @unique
+  lastPlaced       DateTime
+  placedPixels     Pixel[]
+  refresh_token    String
+  token_expiration DateTime
+  token_type       String
 }

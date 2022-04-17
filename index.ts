@@ -1,3 +1,4 @@
+import DiscordOAuth2 from "discord-oauth2";
 import { Jimp } from "@jimp/core";
 import { PrismaClient } from ".prisma/client";
 
@@ -12,8 +13,13 @@ const config = JSON.parse(fs.readFileSync("config.json").toString());
 const prisma = new PrismaClient();
 
 var image: Jimp | null = null;
+var oauth2 = new DiscordOAuth2({
+    clientId: config.id,
+    clientSecret: config.secret,
+    redirectUri: "http://localhost:9078/api/v1/authenticate"
+});
 
-jimp.read("public/canvas.png").then(img => { image = img; }).catch(err => { throw err; });
+jimp.read("public/canvas.png").then(img => { image = img; }).catch(e => { throw e; });
 
 app.get("/", (_, res) => {
     res.sendFile(__dirname + "/public/index.html");
@@ -58,13 +64,37 @@ setInterval(() => {
     });
 }, 15000);
 
-// API for placing pixels
-app.get('/api/v1/placePixel/:x/:y/:color', (req, res) => {
+// Test endpoint: https://discord.com/api/oauth2/authorize?client_id=961409481248493628&redirect_uri=http%3A%2F%2Flocalhost%3A9078%2Fapi%2Fv1%2Fauthenticate&response_type=code&scope=identify
+// Endpoint for authenticating Discord users
+// TODO: Populate state and check for validity
+app.get("/api/v1/authenticate", (req, res) => {
+    // Get the code from the authorization prompt
+    let code = req.query.code as string;
+    // Ask Discord for the token nicely
+    oauth2.tokenRequest({
+        code,
+        grantType: "authorization_code",
+        scope: ["identify"]
+    }).then(token => {
+        // TODO: Fetch user information
+        // TODO: Store token in the database
+        // TODO: Generate a JWT
+        // TODO: Store the JWT in a cookie
+        // Redirect to the homepage
+        res.redirect("/");
+    }).catch(e => {
+        console.error(e);
+        res.send("Authentication failed. Please try again or contact Breadpudding#9078 if issues persist.");
+    });
+});
+
+// Endpoint for placing pixels
+app.get('/api/v1/place', (req, res) => {
     let status = {success: false};
     // Collect data
-    let color = req.params.color;
-    let x = parseInt(req.params.x);
-    let y = parseInt(req.params.y);
+    let color = req.query.color as string;
+    let x = parseInt(req.query.x as string);
+    let y = parseInt(req.query.y as string);
     // Make sure we're dealing with correct types
     if(typeof x === "number" && typeof y === "number" && typeof color === "string") {
         if(/[0-9A-Fa-f]{6}/.test(color)) {
