@@ -1,4 +1,6 @@
 /node_modules
+/prisma/pixelart.db
 /public/canvas.png
 /config.json
-/pixelart.db
+/private.pem
+/public.pem

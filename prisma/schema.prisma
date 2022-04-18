@@ -8,21 +8,24 @@ datasource db {
 }
 
 model Pixel {
-  id       Int      @id @default(autoincrement())
-  color    Int
-  placedAt DateTime @default(now())
-  user     User     @relation(fields: [userId], references: [id])
-  userId   Int
-  x        Int
-  y        Int
+  id        Int      @id @default(autoincrement())
+  color     String
+  placed_at DateTime @default(now())
+  user      User     @relation(fields: [user_id], references: [id])
+  user_id   String
+  x         Int
+  y         Int
 }
 
 model User {
   access_token     String
-  id               Int      @id @unique
-  lastPlaced       DateTime
-  placedPixels     Pixel[]
+  avatar           String?
+  discriminator    String
+  id               String   @id @unique
+  last_placed      DateTime
+  placed_pixels    Pixel[]
   refresh_token    String
   token_expiration DateTime
   token_type       String
+  username         String
 }
