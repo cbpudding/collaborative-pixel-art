@@ -1,13 +1,13 @@
-import { PrismaClient } from ".prisma/client";
+//import { PrismaClient } from ".prisma/client";
 
 import express from "express";
 import fs from "fs";
-import jwt from "jsonwebtoken";
+//import jwt from "jsonwebtoken";
 import ws from "ws";
 
 const app = express();
 const config = JSON.parse(fs.readFileSync("config.json").toString());
-const prisma = new PrismaClient();
+//const prisma = new PrismaClient();
 
 app.get("/", (_, res) => {
     res.sendFile(__dirname + "/public/index.html");
